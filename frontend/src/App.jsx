@@ -4,7 +4,9 @@ import SignupRoleModal from "./components/SignupRoleModal";
 import LoginPage from "./components/LoginPage";
 import MigrantWorkerSignup from "./components/MigrantWorkerSignup";
 import HealthcareProviderSignup from "./components/HealthcareProviderSignup";
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import WorkerProfileGuard from "./components/WorkerProfileGuard";
+import WorkerProfileForm from "./components/WorkerProfileForm";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import WorkerDashboard from "./pages/WorkerDashboard";
 import Adminpage from "./pages/Adminpage";
 import Doctorpage from "./pages/Doctorpage";
@@ -16,23 +18,26 @@ function App() {
 
   const PrivateRoute = () => {
     const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role")
+    const role = localStorage.getItem("role");
+
     if (token) {
       setIsLoginOpen(false);
-      if(role==="worker"){
-        return <WorkerDashboard/>
+
+      if (role === "worker") {
+        return (
+          <WorkerProfileGuard>
+            <WorkerDashboard />
+          </WorkerProfileGuard>
+        );
+      } else if (role === "doctor") {
+        return <Doctorpage />;
+      } else if (role === "admin") {
+        return <Adminpage />;
       }
-      else if(role==="doctor"){
-        return <Doctorpage/>
-      } 
-      else if(role==="admin"){
-        return <Adminpage/>
-      }
-      
     } else {
-      return <Navigate to='/?login' />;
+      return <Navigate to="/?login" />;
     }
-  }
+  };
 
   return (
     <BrowserRouter>
@@ -76,11 +81,10 @@ function App() {
         />
       )}
 
-      {/* --- Routes Handle Page Switching --- */}
+      {/* --- Routes --- */}
       <Routes>
-        {/* Make LandingPage the root route */}
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <LandingPage
               onSignupClick={() => {
@@ -93,9 +97,10 @@ function App() {
               }}
               setIsLoginOpen={setIsLoginOpen}
             />
-          } 
+          }
         />
         <Route path="/page" element={<PrivateRoute />} />
+        <Route path="/worker/complete-profile" element={<WorkerProfileForm />} />
       </Routes>
     </BrowserRouter>
   );

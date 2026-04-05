@@ -188,7 +188,7 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
                 <Stethoscope className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
               </div>
               <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Healthcare Provider</h1>
-              <p className="text-gray-600 text-xs sm:text-sm mt-1">Join MigraHealth as a medical professional</p>
+              <p className="text-gray-600 text-xs sm:text-sm mt-1">Join NeuraCare as a medical professional</p>
             </div>
 
             {/* ================= FORM ================= */}

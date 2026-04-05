@@ -23,6 +23,9 @@ const workerSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    verificationCodeExpiry: {
+        type: Date,
+    },
     verificationCode:{
         type:String
     },
