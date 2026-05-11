@@ -3,7 +3,7 @@ import HealthRecord from "../models/HealthRecord.js";
 import WorkerProfile from "../models/WorkerProfile.js";
 
 import { model } from "../utils/Gemini.js";
-/* 🔥 Get all pending doctors */
+
 export const getPendingDoctors = async (req, res) => {
   try {
     const doctors = await DoctorModel.find({ isVerified: false });
@@ -20,7 +20,7 @@ export const getApprovedDoctors = async(req,res) => {
     return res.status(500).json({ message: "Error fetching doctors" });
   }
 }
-/* 🔥 Approve doctor */
+
 export const approveDoctor = async (req, res) => {
   try {
     const { id } = req.params;
@@ -35,7 +35,7 @@ export const approveDoctor = async (req, res) => {
   }
 };
 
-/* 🔥 Reject doctor */
+
 export const rejectDoctor = async (req, res) => {
   try {
     const { id } = req.params;
@@ -50,7 +50,7 @@ export const rejectDoctor = async (req, res) => {
 
 export const getAiInsights = async (req, res) => {
   try {
-    // ✅ Step 1: Get ONLY workers who gave consent
+    
     const consentedProfiles = await WorkerProfile.find({
       "consent.shareWithAdmin": true,
     }).select("userId location age gender occupation");
@@ -74,7 +74,6 @@ export const getAiInsights = async (req, res) => {
       });
     }
 
-    // ✅ Step 2: Fetch health records ONLY for consented workers
     const records = await HealthRecord.find({
       workerId: { $in: consentedUserIds },
     }).limit(200);
@@ -93,7 +92,7 @@ export const getAiInsights = async (req, res) => {
       });
     }
 
-    // Step 3: Build profile map
+
     const profileMap = {};
     consentedProfiles.forEach((p) => {
       profileMap[p.userId.toString()] = {
@@ -104,7 +103,7 @@ export const getAiInsights = async (req, res) => {
       };
     });
 
-    // Step 4: Enrich records with profile data
+
     const enrichedData = records.map((r) => {
       const profile = profileMap[r.workerId?.toString()] || {};
       return {
@@ -124,7 +123,7 @@ export const getAiInsights = async (req, res) => {
       locationCounts[r.location] = (locationCounts[r.location] || 0) + 1;
     });
 
-    // Step 5: AI prompt
+  
     const prompt = `
 You are a public health AI system for migrant worker healthcare.
 
@@ -186,7 +185,7 @@ Return ONLY raw JSON (no markdown, no backticks, no explanation):
       return res.json({ message: "AI parsing failed", raw: text });
     }
 
-    // ✅ Add consent stats to the response
+   
     const totalWorkers = await WorkerProfile.countDocuments();
     aiData.consentStats = {
       total: totalWorkers,

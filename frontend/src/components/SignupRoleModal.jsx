@@ -8,24 +8,20 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
 
   useEffect(() => {
     if (open) {
-      // Mount the component
+      
       setShouldRender(true);
-      // Trigger animation after a brief delay for DOM to settle
       const animateTimer = setTimeout(() => {
         setIsAnimating(true);
       }, 50);
 
-      // Prevent body scroll
       document.body.style.overflow = "hidden";
 
       return () => {
         clearTimeout(animateTimer);
       };
     } else {
-      // Start exit animation
       setIsAnimating(false);
 
-      // Unmount after animation completes
       const unmountTimer = setTimeout(() => {
         setShouldRender(false);
         document.body.style.overflow = "unset";
@@ -41,7 +37,7 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
 
   return createPortal(
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4">
-      {/* Enhanced Backdrop with smooth fade and blur */}
+
       <div
         onClick={onClose}
         className={`
@@ -57,7 +53,6 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
                 `}
       />
 
-      {/* Modal Container with scale and fade animation */}
       <div
         className={`
                     relative z-10 w-full max-w-4xl
@@ -76,26 +71,23 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
           willChange: "transform, opacity",
         }}
       >
-        {/* Decorative gradient at top */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-slate-500" />
 
-        {/* Content Container - Scrollable without visible scrollbar */}
+       
         <div
           className="p-5 sm:p-8 md:p-10 overflow-y-hidden max-h-[95vh] sm:max-h-[90vh]"
           style={{
-            scrollbarWidth: "none" /* Firefox */,
-            msOverflowStyle: "none" /* IE and Edge */,
-            WebkitOverflowScrolling: "touch" /* Smooth scrolling on iOS */,
+            scrollbarWidth: "none" ,
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch" ,
           }}
         >
-          {/* Hide scrollbar for Chrome, Safari and Opera */}
           <style jsx>{`
             div::-webkit-scrollbar {
               display: none;
             }
           `}</style>
 
-          {/* Close Button with enhanced hover */}
           <button
             onClick={onClose}
             className="
@@ -112,7 +104,6 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
             <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
-          {/* Header with staggered animation */}
           <div
             className={`
                             text-center mb-8 sm:mb-10 md:mb-12
@@ -124,7 +115,6 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
                             }
                         `}
           >
-            {/* Animated Icon */}
             <div
               className={`
                                 inline-flex items-center justify-center 
@@ -150,7 +140,6 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
             </p>
           </div>
 
-          {/* Role Cards Grid with staggered entrance */}
           <div className=" flex justify-center md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
             <RoleCard
               icon={<User className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />}
@@ -175,7 +164,6 @@ export default function SignupRoleModal({ open, onClose, onSelectRole }) {
             />
           </div>
 
-          {/* Footer with fade-in */}
           <div
             className={`
                             mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-gray-200 text-center
@@ -275,7 +263,6 @@ function RoleCard({
         willChange: "transform, opacity",
       }}
     >
-      {/* Gradient overlay on hover with smooth transition */}
       <div
         className={`
                     absolute inset-0 rounded-xl sm:rounded-2xl 
@@ -286,9 +273,8 @@ function RoleCard({
                 `}
       />
 
-      {/* Content */}
+     
       <div className="relative z-10">
-        {/* Icon with pulse effect on hover */}
         <div
           className={`
                         inline-flex items-center justify-center 
@@ -301,17 +287,14 @@ function RoleCard({
           {icon}
         </div>
 
-        {/* Title */}
         <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 group-hover:text-white mb-2 sm:mb-3 transition-colors duration-300">
           {title}
         </h3>
 
-        {/* Description - Hidden on mobile */}
         <p className="hidden sm:block text-xs sm:text-sm text-gray-600 group-hover:text-white/95 leading-relaxed mb-3 sm:mb-4 transition-colors duration-300">
           {description}
         </p>
 
-        {/* CTA with arrow */}
         <div
           className={`flex items-center font-semibold text-xs sm:text-sm transition-all duration-300 ${colors.text}`}
         >
@@ -332,12 +315,12 @@ function RoleCard({
         </div>
       </div>
 
-      {/* Animated shine effect on hover */}
+      
       <div className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-white/20 via-transparent to-transparent rotate-45 transform translate-x-full group-hover:translate-x-0 transition-transform duration-1000" />
       </div>
 
-      {/* Subtle glow effect */}
+
       <div className="absolute inset-0 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent rounded-t-xl sm:rounded-t-2xl" />
       </div>

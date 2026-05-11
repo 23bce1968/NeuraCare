@@ -1,5 +1,4 @@
 @import "tailwindcss";
-/* Hide scrollbar everywhere but keep scrolling */
 * {
     scrollbar-width: none;
   }

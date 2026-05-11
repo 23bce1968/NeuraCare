@@ -10,7 +10,7 @@ import {
 const API = "http://localhost:8000";
 const authHeader = () => ({ Authorization: `Bearer ${localStorage.getItem("token")}` });
 
-/* ─── Animated wrapper for staggered reveals ─── */
+
 function Reveal({ children, delay = 0, className = "" }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => { const t = setTimeout(() => setVisible(true), delay); return () => clearTimeout(t); }, [delay]);
@@ -37,7 +37,7 @@ export default function WorkerDashboard() {
 
   useEffect(() => { fetchAll(); setTimeout(() => setMounted(true), 50); }, []);
 
-  // Fetch consent status on load
+ 
   useEffect(() => {
     const fetchConsent = async () => {
       try {
@@ -104,13 +104,13 @@ export default function WorkerDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-emerald-50/20 to-teal-50/10 relative">
-      {/* Background effects */}
+     
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-emerald-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "6s" }} />
         <div className="absolute bottom-0 -left-40 w-96 h-96 bg-teal-200/15 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "8s", animationDelay: "2s" }} />
       </div>
 
-      {/* Header */}
+     
       <header className={`bg-white/70 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-30 transition-all duration-700 ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}>
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -146,7 +146,7 @@ export default function WorkerDashboard() {
 
       <div className="max-w-6xl mx-auto px-4 py-6 relative">
 
-        {/* Welcome + Next appointment */}
+      
         <Reveal delay={100}>
           <div className="mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
@@ -178,7 +178,7 @@ export default function WorkerDashboard() {
           </Reveal>
         )}
 
-        {/* Tabs */}
+      
         <Reveal delay={300}>
           <div className="flex gap-1 bg-white/70 backdrop-blur-xl border border-gray-200/60 rounded-2xl p-1.5 mb-6 overflow-x-auto shadow-sm">
             {[
@@ -197,10 +197,10 @@ export default function WorkerDashboard() {
           </div>
         </Reveal>
 
-        {/* ════════ OVERVIEW ════════ */}
+      
         {tab === "overview" && profile && (
           <div className="space-y-4">
-            {/* Quick stats row */}
+         
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
                 { label: "Total Visits", value: healthRecords.length, icon: Activity, gradient: "from-emerald-500 to-teal-600", shadow: "emerald" },
@@ -220,7 +220,6 @@ export default function WorkerDashboard() {
               ))}
             </div>
 
-            {/* Profile cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
                 { label: "Age", value: `${profile.age} years`, icon: User, color: "emerald" },
@@ -236,7 +235,6 @@ export default function WorkerDashboard() {
               ))}
             </div>
 
-            {/* Emergency + Security */}
             <Reveal delay={900}>
               <div className="grid sm:grid-cols-2 gap-3">
                 <div className="bg-gradient-to-br from-red-50 to-orange-50 border border-red-200/60 rounded-2xl p-4 hover:shadow-lg transition-all duration-500 group">
@@ -272,7 +270,7 @@ export default function WorkerDashboard() {
           </div>
         )}
 
-        {/* ════════ HEALTH RECORDS ════════ */}
+   
         {tab === "records" && (
           <div>
             {!hasAnyAppointment ? (
@@ -333,7 +331,7 @@ export default function WorkerDashboard() {
           </div>
         )}
 
-        {/* ════════ APPOINTMENTS ════════ */}
+    
         {tab === "appointments" && (
           <div className="space-y-3">
             {appointments.length === 0 ? (
@@ -366,7 +364,7 @@ export default function WorkerDashboard() {
           </div>
         )}
 
-        {/* ════════ FIND DOCTORS ════════ */}
+     
         {tab === "doctors" && (
           <div>
             {!hasAnyAppointment && (
@@ -411,19 +409,18 @@ export default function WorkerDashboard() {
         )}
       </div>
 
-      {/* ── Modals ── */}
+
       {bookingDoctor && <BookingModal doctor={bookingDoctor} onClose={() => setBookingDoctor(null)} onBooked={() => { setBookingDoctor(null); fetchAll(); setTab("appointments"); }} />}
       {selectedRecord && <RecordDetailModal record={selectedRecord} onClose={() => setSelectedRecord(null)} />}
 
-      {/* ── Consent Modal ── */}
       {showConsentModal && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 anim-overlay" style={{ backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)" }}>
           <div className="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden anim-modal">
-            {/* Top accent */}
+        
             <div className={`h-1.5 ${consent ? "bg-gradient-to-r from-amber-400 to-orange-500" : "bg-gradient-to-r from-emerald-400 to-teal-500"}`} />
 
             <div className="p-6">
-              {/* Icon */}
+         
               <div className="flex justify-center mb-4">
                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl ${
                   consent
@@ -437,12 +434,12 @@ export default function WorkerDashboard() {
                 </div>
               </div>
 
-              {/* Title */}
+           
               <h3 className="text-xl font-black text-gray-900 text-center mb-2">
                 {consent ? "Disable Data Sharing?" : "Enable Data Sharing?"}
               </h3>
 
-              {/* Description */}
+        
               <p className="text-sm text-gray-500 text-center leading-relaxed mb-5">
                 {consent
                   ? "Your health data will become fully private. Admin will not be able to view your records and your data will be excluded from AI health analysis."
@@ -450,7 +447,7 @@ export default function WorkerDashboard() {
                 }
               </p>
 
-              {/* What changes */}
+            
               <div className={`rounded-xl p-3 mb-5 ${consent ? "bg-amber-50" : "bg-emerald-50"}`}>
                 <p className={`text-xs font-bold mb-2 ${consent ? "text-amber-700" : "text-emerald-700"}`}>What this means:</p>
                 <div className="space-y-1.5">
@@ -466,7 +463,6 @@ export default function WorkerDashboard() {
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="flex gap-3">
                 <button onClick={() => setShowConsentModal(false)}
                   className="flex-1 py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-semibold text-sm hover:bg-gray-50 active:scale-[0.97] transition-all">
@@ -486,7 +482,7 @@ export default function WorkerDashboard() {
         </div>
       )}
 
-      {/* Global animations */}
+ 
       <style>{`
         @keyframes modalIn { from { opacity:0; transform:scale(0.95) translateY(12px); } to { opacity:1; transform:scale(1) translateY(0); } }
         @keyframes overlayIn { from { opacity:0; } to { opacity:1; } }
@@ -497,7 +493,6 @@ export default function WorkerDashboard() {
   );
 }
 
-/* ══════════════════ BOOKING MODAL ══════════════════ */
 function BookingModal({ doctor, onClose, onBooked }) {
   const today = new Date().toISOString().split("T")[0];
   const timeSlots = ["09:00 AM","10:00 AM","11:00 AM","12:00 PM","02:00 PM","03:00 PM","04:00 PM","05:00 PM"];
@@ -566,7 +561,7 @@ function BookingModal({ doctor, onClose, onBooked }) {
   );
 }
 
-/* ══════════════════ RECORD DETAIL MODAL ══════════════════ */
+
 function RecordDetailModal({ record, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4 anim-overlay" style={{ backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
@@ -638,7 +633,6 @@ function RecordDetailModal({ record, onClose }) {
   );
 }
 
-/* ══════════════════ HELPER COMPONENTS ══════════════════ */
 
 function ProfileCard({ label, value, icon: Icon, color }) {
   const colorMap = {

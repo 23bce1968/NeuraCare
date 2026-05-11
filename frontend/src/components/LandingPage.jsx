@@ -7,7 +7,7 @@ import {
   Zap, Globe, Eye
 } from 'lucide-react';
 
-/* ─── Custom SVG Logo ─── */
+
 const Logo = ({ size = 40 }) => (
   <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -21,21 +21,21 @@ const Logo = ({ size = 40 }) => (
       </linearGradient>
     </defs>
     <rect width="48" height="48" rx="14" fill="url(#logoGrad)" />
-    {/* Pulse ring */}
+   
     <circle cx="24" cy="24" r="18" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" fill="none" />
-    {/* ECG line */}
+ 
     <polyline points="8,24 14,24 17,18 20,30 23,20 26,28 29,24 32,24 34,16 36,32 38,24 42,24"
       stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    {/* Heart */}
+
     <path d="M24 34 C24 34 14 27 14 21 C14 17.5 17 15 20 15 C22 15 23.5 16.5 24 17.5 C24.5 16.5 26 15 28 15 C31 15 34 17.5 34 21 C34 27 24 34 24 34Z"
       fill="url(#heartGrad)" opacity="0.95" />
-    {/* Plus sign */}
+
     <rect x="22.5" y="20" width="3" height="10" rx="1.5" fill="#10b981" />
     <rect x="19" y="23.5" width="10" height="3" rx="1.5" fill="#10b981" />
   </svg>
 );
 
-/* ─── Reveal on scroll / mount ─── */
+
 function Reveal({ children, delay = 0, className = "" }) {
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
@@ -52,7 +52,7 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-/* ─── Animated counter ─── */
+
 function AnimCounter({ target, suffix = "" }) {
   const [val, setVal] = useState(0);
   const ref = useRef(null);
@@ -149,7 +149,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
 
-      {/* ══════ HEADER ══════ */}
+  
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-white/90 backdrop-blur-xl shadow-lg shadow-gray-200/50 py-2" : "bg-transparent py-3"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -192,7 +192,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
         </div>
       </header>
 
-      {/* ══════ HERO ══════ */}
+   
       <section className="relative h-[100vh] min-h-[600px] max-h-[900px] overflow-hidden">
         {slides.map((slide, index) => (
           <div key={index} className={`absolute inset-0 transition-all duration-1000 ${index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"}`}>
@@ -203,7 +203,6 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
           </div>
         ))}
 
-        {/* Hero content */}
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
           <div className="max-w-2xl">
             <Reveal delay={200}>
@@ -236,7 +235,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
           </div>
         </div>
 
-        {/* Slide navigation */}
+       
         <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all hover:scale-110">
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -251,14 +250,12 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
           ))}
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 right-8 hidden lg:flex flex-col items-center gap-2 text-white/40 animate-bounce" style={{ animationDuration: "2s" }}>
           <span className="text-[10px] uppercase tracking-widest font-medium">Scroll</span>
           <ChevronDown className="w-4 h-4" />
         </div>
       </section>
 
-      {/* ══════ TRUST BAR ══════ */}
       <Reveal>
         <section className="py-6 bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-8 sm:gap-16">
@@ -277,7 +274,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
         </section>
       </Reveal>
 
-      {/* ══════ FEATURES ══════ */}
+     
       <section id="features" className="py-20 sm:py-28 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-100/30 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -319,12 +316,12 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
         </div>
       </section>
 
-      {/* ══════ DASHBOARD ══════ */}
+     
       <section id="dashboard" className="py-20 sm:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
-          {/* Grid pattern */}
+    
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
         </div>
 
@@ -343,7 +340,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
             </div>
           </Reveal>
 
-          {/* Stats */}
+        
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10">
             {dashboardStats.map((stat, i) => (
               <Reveal key={i} delay={i * 100}>
@@ -364,7 +361,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
             ))}
           </div>
 
-          {/* Advisories */}
+         
           <Reveal delay={400}>
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
@@ -391,7 +388,6 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
         </div>
       </section>
 
-      {/* ══════ CTA ══════ */}
       <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-emerald-100/50 to-teal-100/50 rounded-full blur-3xl" />
@@ -422,7 +418,7 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
         </div>
       </section>
 
-      {/* ══════ FOOTER ══════ */}
+    
       <footer className="bg-gray-900 text-white py-12 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -444,7 +440,6 @@ const LandingPage = ({ onSignupClick, onLoginClick, setIsLoginOpen }) => {
         </div>
       </footer>
 
-      {/* Animations */}
       <style>{`
         @keyframes heroIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
         .hero-title { animation: heroIn 0.8s ease-out forwards; }

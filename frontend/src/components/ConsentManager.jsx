@@ -49,9 +49,9 @@ export default function ConsentManager() {
 
   return (
     <>
-      {/* ── Consent Card ── */}
+    
       <div className="bg-white border border-gray-200 rounded-2xl p-5">
-        {/* Header */}
+   
         <div className="flex items-center gap-3 mb-4">
           <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md ${
             consent ? "bg-emerald-500" : "bg-gray-400"
@@ -64,7 +64,7 @@ export default function ConsentManager() {
           </div>
         </div>
 
-        {/* Toggle row */}
+ 
         <div className={`rounded-xl p-4 border ${consent ? "bg-emerald-50 border-emerald-200" : "bg-gray-50 border-gray-200"}`}>
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -91,7 +91,7 @@ export default function ConsentManager() {
           </div>
         </div>
 
-        {/* Info */}
+       
         <div className={`mt-3 flex items-start gap-2 rounded-lg px-3 py-2 ${consent ? "bg-emerald-50" : "bg-amber-50"}`}>
           <Info className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${consent ? "text-emerald-500" : "text-amber-500"}`} />
           <p className={`text-[11px] leading-relaxed ${consent ? "text-emerald-700" : "text-amber-700"}`}>
@@ -105,16 +105,16 @@ export default function ConsentManager() {
         )}
       </div>
 
-      {/* ── Confirmation Modal ── */}
+     
       {showConfirm && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 relative" style={{ animation: "cmIn 0.25s ease-out" }}>
-            {/* Close */}
+     
             <button onClick={() => setShowConfirm(false)} className="absolute top-3 right-3 p-1.5 rounded-lg hover:bg-gray-100 text-gray-400">
               <X className="w-4 h-4" />
             </button>
 
-            {/* Icon */}
+        
             <div className="text-center mb-4">
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3 ${
                 pendingValue ? "bg-emerald-500" : "bg-amber-500"
@@ -129,14 +129,13 @@ export default function ConsentManager() {
               </h3>
             </div>
 
-            {/* Description */}
+  
             <p className="text-sm text-gray-500 text-center leading-relaxed mb-6">
               {pendingValue
                 ? "Your anonymized health data will be shared with the admin for public health monitoring and AI-powered insights. Your personal identity remains protected."
                 : "Your health data will become fully private. Admin will not be able to see your records and your data will be excluded from AI analysis."}
             </p>
 
-            {/* Buttons */}
             <div className="flex gap-3">
               <button onClick={() => setShowConfirm(false)}
                 className="flex-1 py-2.5 rounded-xl border-2 border-gray-200 text-gray-600 font-semibold text-sm hover:bg-gray-50 transition-all">

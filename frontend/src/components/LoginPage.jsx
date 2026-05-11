@@ -15,7 +15,7 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
 
   const DURATION = 350;
 
-  // Lock body scroll on mount, unlock on unmount
+  // body scroll lock
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = ""; };
@@ -65,26 +65,25 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
   return (
     <div className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 transition-all duration-[350ms] ease-out ${isAnimating ? "bg-black/40 backdrop-blur-md opacity-100" : "bg-black/0 backdrop-blur-0 opacity-0"}`}>
 
-      {/* Background blobs */}
+    
       <div className={`absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-500 ${isAnimating ? "opacity-100" : "opacity-0"}`}>
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-emerald-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "4s" }} />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "6s", animationDelay: "1s" }} />
       </div>
 
-      {/* Card */}
+    
       <div className={`relative w-full max-w-sm bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-[350ms] ease-out ${isAnimating ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-6"}`}>
 
-        {/* Close */}
         <button onClick={handleClose} aria-label="Close modal"
           className="absolute top-3 right-3 z-20 p-2 rounded-xl text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-300 hover:rotate-90 hover:scale-110 active:scale-95">
           <X className="w-5 h-5" />
         </button>
 
-        {/* Top gradient */}
+       
         <div className="h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
 
         <div className="p-6">
-          {/* Header */}
+        
           <div className="text-center mb-6">
             <div className="relative inline-block mb-4">
               <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-xl shadow-emerald-500/25 hover:scale-110 hover:rotate-3 transition-all duration-500">
@@ -98,7 +97,7 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
             <p className="text-gray-400 text-sm mt-1">Sign in to continue to NeuraCare</p>
           </div>
 
-          {/* Error banner */}
+        
           {loginError && (
             <div className="mb-4 px-3 py-2.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-600 flex items-center gap-2 animate-shake">
               <X className="w-3.5 h-3.5 shrink-0" />
@@ -106,9 +105,9 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
             </div>
           )}
 
-          {/* Form */}
+       
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
+       
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1.5">Email Address</label>
               <div className="relative group">
@@ -121,7 +120,7 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
               {errors.email && <p className="text-[11px] text-red-500 mt-1">{errors.email}</p>}
             </div>
 
-            {/* Password */}
+          
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1.5">Password</label>
               <div className="relative group">
@@ -138,7 +137,6 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
               {errors.password && <p className="text-[11px] text-red-500 mt-1">{errors.password}</p>}
             </div>
 
-            {/* Submit */}
             <button type="submit" disabled={isLoading}
               className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-sm shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/35 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 transition-all duration-300 flex items-center justify-center gap-2">
               {isLoading ? (
@@ -149,7 +147,7 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
             </button>
           </form>
 
-          {/* Footer */}
+       
           <div className="text-center mt-5 text-sm text-gray-500">
             Don't have an account?{" "}
             <button onClick={onSignupRedirect} className="text-emerald-600 font-semibold hover:text-emerald-700 hover:underline transition-colors">
@@ -159,7 +157,6 @@ export default function LoginPage({ onClose, onSignupRedirect }) {
         </div>
       </div>
 
-      {/* Shake animation for error */}
       <style>{`
         @keyframes shake { 0%,100% { transform:translateX(0); } 20%,60% { transform:translateX(-4px); } 40%,80% { transform:translateX(4px); } }
         .animate-shake { animation: shake 0.4s ease-out; }

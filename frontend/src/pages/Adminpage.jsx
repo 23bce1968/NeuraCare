@@ -17,7 +17,6 @@ const TABS = [
 const API = "http://localhost:8000/admin";
 const SEV_COLORS = { mild: "#34d399", moderate: "#fbbf24", severe: "#f97316", critical: "#ef4444" };
 
-/* ── Pure CSS Bar Chart ── */
 const BarChartCSS = ({ data, dataKey, labelKey, color = "#6366f1", horizontal = false }) => {
   const max = Math.max(...data.map((d) => d[dataKey]), 1);
   if (horizontal) {
@@ -50,7 +49,6 @@ const BarChartCSS = ({ data, dataKey, labelKey, color = "#6366f1", horizontal = 
   );
 };
 
-/* ── Pure CSS Line Chart ── */
 const LineChartCSS = ({ data, dataKey, labelKey }) => {
   const max = Math.max(...data.map((d) => d[dataKey]), 1);
   const h = 160;
@@ -87,7 +85,6 @@ const LineChartCSS = ({ data, dataKey, labelKey }) => {
   );
 };
 
-/* ── Pure CSS Donut Chart ── */
 const DonutChart = ({ data }) => {
   const total = data.reduce((s, d) => s + d.value, 0) || 1;
   let offset = 0;
@@ -126,8 +123,6 @@ const DonutChart = ({ data }) => {
     </div>
   );
 };
-
-/* ══════════════════════ MAIN COMPONENT ══════════════════════ */
 
 function Adminpage() {
   const [doctors, setDoctors] = useState([]);
@@ -192,7 +187,6 @@ function Adminpage() {
 
       {sidebar && <div className="fixed inset-0 bg-black/30 z-30 lg:hidden" onClick={() => setSidebar(false)} />}
 
-      {/* Sidebar */}
       <aside className={`fixed lg:sticky top-0 z-40 h-screen w-64 bg-white border-r border-gray-200 flex flex-col transition-transform duration-300 ${sidebar ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}>
         <div className="flex items-center justify-between p-5">
           <h2 className="text-lg font-bold text-blue-600 flex items-center gap-2"><ShieldCheck size={22} /> Admin Panel</h2>
@@ -217,7 +211,6 @@ function Adminpage() {
         </div>
       </aside>
 
-      {/* Main */}
       <main className="flex-1 min-w-0">
         <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-gray-200 px-4 sm:px-8 py-4 flex items-center gap-4">
           <button onClick={() => setSidebar(true)} className="lg:hidden p-2 rounded-lg hover:bg-gray-100"><Menu size={22} /></button>
@@ -234,7 +227,6 @@ function Adminpage() {
 
         <div className="p-4 sm:p-8">
 
-          {/* ═══ AI INSIGHTS ═══ */}
           {activeTab === "ai" ? (
             aiLoading ? (
               <div className="flex flex-col items-center justify-center py-32 gap-4">
@@ -249,7 +241,6 @@ function Adminpage() {
             ) : aiData ? (
               <div className="space-y-6">
 
-                {/* Summary */}
                 <div className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-fuchsia-600 text-white p-6 sm:p-8 rounded-2xl shadow-xl">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                   <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -264,7 +255,6 @@ function Adminpage() {
                   </div>
                 </div>
 
-                {/* Alerts */}
                 {aiData.alerts?.length > 0 && (
                   <div className="space-y-3">
                     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider">Active Alerts</h3>
@@ -289,7 +279,6 @@ function Adminpage() {
                   </div>
                 )}
 
-                {/* Charts Row 1 */}
                 <div className="grid lg:grid-cols-2 gap-6">
                   <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                     <div className="flex items-center gap-2 mb-4"><TrendingUp size={18} className="text-indigo-500" /><h3 className="font-bold text-gray-800">Disease Trend</h3></div>
@@ -301,7 +290,6 @@ function Adminpage() {
                   </div>
                 </div>
 
-                {/* Charts Row 2 */}
                 <div className="grid lg:grid-cols-2 gap-6">
                   <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                     <div className="flex items-center gap-2 mb-4"><MapPin size={18} className="text-blue-500" /><h3 className="font-bold text-gray-800">Cases by Location</h3></div>
@@ -313,7 +301,6 @@ function Adminpage() {
                   </div>
                 </div>
 
-                {/* High Risk + Top Diagnoses */}
                 <div className="grid lg:grid-cols-2 gap-6">
                   <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
                     <div className="flex items-center gap-2 mb-4"><MapPin size={18} className="text-red-500" /><h3 className="font-bold text-gray-800">High Risk Areas</h3></div>
@@ -358,7 +345,6 @@ function Adminpage() {
                   </div>
                 </div>
 
-                {/* Recommendations */}
                 {aiData.recommendations?.length > 0 && (
                   <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5 border border-amber-200">
                     <div className="flex items-center gap-2 mb-4"><Lightbulb size={18} className="text-amber-600" /><h3 className="font-bold text-gray-800">AI Recommendations</h3></div>
@@ -376,7 +362,6 @@ function Adminpage() {
             ) : null
 
           ) : (
-            /* ═══ DOCTOR TABS ═══ */
             <>
               {loading ? (
                 <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">

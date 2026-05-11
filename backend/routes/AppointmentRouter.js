@@ -8,7 +8,6 @@ import { limiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
 
-// ── Helper: check if appointment time has passed ──
 const hasAppointmentPassed = (appt) => {
   const apptDate = new Date(appt.date);
   if (appt.timeSlot) {
@@ -21,7 +20,7 @@ const hasAppointmentPassed = (appt) => {
   return new Date() >= apptDate;
 };
 
-/* ══════════════ WORKER ROUTES ══════════════ */
+
 
 router.get('/worker/doctors',limiter, ensureAuthenticated, async (req, res) => {
   try {
@@ -60,7 +59,7 @@ router.get('/worker/health-records',limiter, ensureAuthenticated, async (req, re
   } catch (err) { res.status(500).json({ message: 'Server error' }); }
 });
 
-/* ══════════════ DOCTOR ROUTES ══════════════ */
+
 
 router.get('/doctor/appointments',limiter, ensureAuthenticated, async (req, res) => {
   try {
@@ -77,7 +76,6 @@ router.get('/doctor/appointments',limiter, ensureAuthenticated, async (req, res)
   } catch (err) { res.status(500).json({ message: 'Server error' }); }
 });
 
-// ✅ Doctor creates health record — only AFTER appointment time
 router.post('/doctor/health-record',limiter, ensureAuthenticated, async (req, res) => {
   try {
     const {
@@ -86,7 +84,6 @@ router.post('/doctor/health-record',limiter, ensureAuthenticated, async (req, re
       notes, type, status
     } = req.body;
 
-    // ── Validate appointment time has passed ──
     if (appointmentId) {
       const appointment = await Appointment.findById(appointmentId);
       if (!appointment) {

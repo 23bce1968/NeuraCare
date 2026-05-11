@@ -10,14 +10,12 @@ import {
 const API = "http://localhost:8000";
 const authHeader = () => ({ Authorization: `Bearer ${localStorage.getItem("token")}` });
 
-/* ─── Reveal wrapper ─── */
 function Reveal({ children, delay = 0, className = "" }) {
   const [v, setV] = useState(false);
   useEffect(() => { const t = setTimeout(() => setV(true), delay); return () => clearTimeout(t); }, [delay]);
   return <div className={`transition-all duration-700 ease-out ${v ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"} ${className}`}>{children}</div>;
 }
 
-/* ─── Doctor SVG Logo ─── */
 const DocLogo = () => (
   <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
     <defs><linearGradient id="dg" x1="0" y1="0" x2="48" y2="48"><stop offset="0%" stopColor="#3b82f6" /><stop offset="100%" stopColor="#06b6d4" /></linearGradient></defs>
@@ -37,11 +35,9 @@ export default function Doctorpage() {
   const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Check if appointment date+time has passed
   const hasApptPassed = (appt) => {
     const apptDate = new Date(appt.date);
     const now = new Date();
-    // Parse timeSlot like "03:00 PM"
     if (appt.timeSlot) {
       const [time, period] = appt.timeSlot.split(" ");
       let [hours, mins] = time.split(":").map(Number);
@@ -105,13 +101,13 @@ export default function Doctorpage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-cyan-50/10 relative">
-      {/* Background */}
+    
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-blue-200/15 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "6s" }} />
         <div className="absolute bottom-0 -left-40 w-96 h-96 bg-cyan-200/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: "8s", animationDelay: "2s" }} />
       </div>
 
-      {/* Header */}
+   
       <header className={`bg-white/70 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-30 transition-all duration-700 ${mounted ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}>
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -143,7 +139,7 @@ export default function Doctorpage() {
 
       <div className="max-w-6xl mx-auto px-4 py-6 relative">
 
-        {/* Welcome */}
+        
         <Reveal delay={100}>
           <div className="mb-6">
             <h1 className="text-2xl sm:text-3xl font-black text-gray-900">
@@ -154,7 +150,7 @@ export default function Doctorpage() {
           </div>
         </Reveal>
 
-        {/* Stats */}
+     
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
           {[
             { label: "Total Patients", value: appointments.length, icon: Users, gradient: "from-blue-500 to-cyan-600", shadow: "blue" },
@@ -174,7 +170,7 @@ export default function Doctorpage() {
           ))}
         </div>
 
-        {/* Pending alert banner */}
+     
         {pending > 0 && (
           <Reveal delay={600}>
             <div className="mb-6 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-4 text-white shadow-xl shadow-amber-500/20 relative overflow-hidden group">
@@ -192,7 +188,7 @@ export default function Doctorpage() {
           </Reveal>
         )}
 
-        {/* Tabs + Search */}
+
         <Reveal delay={700}>
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
             <div className="flex gap-1 bg-white/70 backdrop-blur-xl border border-gray-200/60 rounded-2xl p-1.5 flex-1 shadow-sm">
@@ -216,7 +212,7 @@ export default function Doctorpage() {
           </div>
         </Reveal>
 
-        {/* ════════ PATIENTS TAB ════════ */}
+      
         {tab === "patients" && (
           <div className="space-y-3">
             {filteredAppts.length === 0 ? (
@@ -282,7 +278,7 @@ export default function Doctorpage() {
                       </div>
                     </div>
 
-                    {/* Expanded profile */}
+         
                     <div className={`overflow-hidden transition-all duration-500 ${isExp ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}>
                       <div className="border-t border-gray-100 bg-gradient-to-r from-gray-50 to-blue-50/30 px-4 py-3">
                         {profile ? (
@@ -313,7 +309,6 @@ export default function Doctorpage() {
           </div>
         )}
 
-        {/* ════════ RECORDS TAB ════════ */}
         {tab === "records" && (
           <div className="space-y-3">
             {filteredRecords.length === 0 ? (
@@ -375,7 +370,7 @@ export default function Doctorpage() {
         )}
       </div>
 
-      {/* Record form modal */}
+     
       {recordForm && (
         <HealthRecordModal appointment={recordForm} onClose={() => setRecordForm(null)}
           onSaved={() => { setRecordForm(null); fetchAll(); setTab("records"); }} />
@@ -389,7 +384,7 @@ export default function Doctorpage() {
   );
 }
 
-/* ══════════════════ HEALTH RECORD MODAL ══════════════════ */
+
 function HealthRecordModal({ appointment, onClose, onSaved }) {
   const [form, setForm] = useState({
     symptoms: "", diagnosis: "", diagnosisSeverity: "",
@@ -445,7 +440,7 @@ function HealthRecordModal({ appointment, onClose, onSaved }) {
         </div>
 
         <div className="p-5 space-y-6">
-          {/* Diagnosis */}
+          
           <FormSection title="Diagnosis" icon={Activity}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="sm:col-span-2">
@@ -478,7 +473,7 @@ function HealthRecordModal({ appointment, onClose, onSaved }) {
             </div>
           </FormSection>
 
-          {/* Vitals */}
+       
           <FormSection title="Vitals" icon={HeartPulse}>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {[
@@ -497,7 +492,7 @@ function HealthRecordModal({ appointment, onClose, onSaved }) {
             </div>
           </FormSection>
 
-          {/* Medications */}
+  
           <FormSection title="Medications" icon={Pill}>
             <div className="space-y-3">
               {form.medications.map((med, i) => (
@@ -526,7 +521,6 @@ function HealthRecordModal({ appointment, onClose, onSaved }) {
             </div>
           </FormSection>
 
-          {/* Lab Results */}
           <FormSection title="Lab Results" icon={FlaskConical}>
             <div className="space-y-3">
               {form.labResults.map((lab, i) => (
@@ -556,7 +550,6 @@ function HealthRecordModal({ appointment, onClose, onSaved }) {
             </div>
           </FormSection>
 
-          {/* Notes */}
           <FormSection title="Notes & Follow-up" icon={Calendar}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
@@ -589,7 +582,6 @@ function HealthRecordModal({ appointment, onClose, onSaved }) {
   );
 }
 
-/* ══════════════════ HELPERS ══════════════════ */
 
 function FormSection({ title, icon: Icon, children }) {
   return (

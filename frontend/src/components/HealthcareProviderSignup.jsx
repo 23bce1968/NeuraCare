@@ -111,7 +111,7 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
 
   return (
     <>
-      {/* ================= POPUP TOAST ================= */}
+      
       {popup.show && (
         <div className="fixed top-5 right-5 z-[99999]">
           <div
@@ -140,7 +140,6 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
               </button>
             </div>
 
-            {/* Auto-close progress bar on success */}
             {popup.type === "success" && (
               <div className="mt-3 h-1 rounded-full bg-blue-100 overflow-hidden">
                 <div
@@ -153,14 +152,13 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
         </div>
       )}
 
-      {/* ================= OVERLAY ================= */}
       <div
         className={`fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm flex items-center justify-center
           px-3 sm:px-0 transition-opacity duration-300
           ${isVisible ? "opacity-100" : "opacity-0"}
         `}
       >
-        {/* ================= CARD ================= */}
+   
         <div
           className={`
             relative w-full max-w-xl
@@ -169,7 +167,7 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
             ${isAnimating ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
           `}
         >
-          {/* Close Button */}
+         
           <button
             onClick={handleClose}
             className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition"
@@ -177,12 +175,12 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
             ✕
           </button>
 
-          {/* Top Gradient */}
+      
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600" />
 
-          {/* ================= CONTENT ================= */}
+         
           <div className="p-4 sm:p-6">
-            {/* Header */}
+        
             <div className="text-center mb-5 sm:mb-6">
               <div className="mx-auto mb-3 sm:mb-4 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-xl bg-blue-100">
                 <Stethoscope className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
@@ -191,7 +189,6 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
               <p className="text-gray-600 text-xs sm:text-sm mt-1">Join NeuraCare as a medical professional</p>
             </div>
 
-            {/* ================= FORM ================= */}
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <Input
@@ -228,7 +225,7 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
                 />
               </div>
 
-              {/* Password */}
+         
               <div className="mt-3 sm:mt-4">
                 <label className="text-xs sm:text-sm font-semibold text-gray-700 mb-1 block">Password</label>
                 <div className="relative">
@@ -258,7 +255,6 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
                 {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -278,14 +274,14 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
               </button>
             </form>
 
-            {/* Note */}
+        
             <div className="mt-3 p-3 bg-blue-50 border border-blue-100 rounded-xl">
               <p className="text-xs sm:text-sm text-blue-700">
                 <strong>Note:</strong> Your account will be verified within 24-48 hours after registration.
               </p>
             </div>
 
-            {/* Footer */}
+  
             <div className="text-center mt-4 pt-3 border-t border-gray-200">
               <p className="text-xs sm:text-sm text-gray-600">
                 Already have an account?{" "}
@@ -301,7 +297,7 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
         </div>
       </div>
 
-      {/* Progress bar keyframe */}
+  
       <style>{`
         @keyframes shrink {
           from { width: 100%; }
@@ -312,7 +308,7 @@ export default function HealthcareProviderSignup({ onClose, onSignin }) {
   );
 }
 
-/* ================= INPUT ================= */
+
 function Input({ label, placeholder, icon, value, onChange, error }) {
   return (
     <div>

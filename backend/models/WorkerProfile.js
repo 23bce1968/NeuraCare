@@ -16,7 +16,7 @@ const workerProfileSchema = new mongoose.Schema(
     language: { type: String, required: true },
     emergencyContact: { type: String, required: true },
 
-    // ── Consent Management ──
+   
     consent: {
       shareWithAdmin: { type: Boolean, default: false },
       updatedAt: { type: Date, default: Date.now },

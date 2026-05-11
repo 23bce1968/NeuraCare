@@ -7,7 +7,7 @@ const router = Router();
 
 const getUserId = (req) => req.user._id || req.user.id;
 
-// GET - Check if profile exists & return it
+
 router.get("/profile",limiter, ensureAuthenticated, async (req, res) => {
   try {
     const profile = await WorkerProfile.findOne({ userId: getUserId(req) });
@@ -19,7 +19,7 @@ router.get("/profile",limiter, ensureAuthenticated, async (req, res) => {
   }
 });
 
-// POST - Create profile
+
 router.post("/profile",limiter, ensureAuthenticated, async (req, res) => {
   try {
     const userId = getUserId(req);
@@ -38,7 +38,7 @@ router.post("/profile",limiter, ensureAuthenticated, async (req, res) => {
   }
 });
 
-// PUT - Update profile
+
 router.put("/profile",limiter, ensureAuthenticated, async (req, res) => {
   try {
     const profile = await WorkerProfile.findOneAndUpdate(
@@ -52,8 +52,7 @@ router.put("/profile",limiter, ensureAuthenticated, async (req, res) => {
   }
 });
 
-// ══════ CONSENT TOGGLE ══════
-// PATCH - Toggle consent
+
 router.patch("/consent",limiter, ensureAuthenticated, async (req, res) => {
   try {
     const { shareWithAdmin } = req.body;
@@ -73,7 +72,7 @@ router.patch("/consent",limiter, ensureAuthenticated, async (req, res) => {
   }
 });
 
-// GET - Get current consent status
+
 router.get("/consent",limiter, ensureAuthenticated, async (req, res) => {
   try {
     const profile = await WorkerProfile.findOne({ userId: getUserId(req) });

@@ -41,7 +41,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* --- Modals Stay Outside Routes --- */}
       <SignupRoleModal
         open={isSignupOpen}
         onClose={() => setIsSignupOpen(false)}
@@ -80,8 +79,6 @@ function App() {
           }}
         />
       )}
-
-      {/* --- Routes --- */}
       <Routes>
         <Route
           path="/"

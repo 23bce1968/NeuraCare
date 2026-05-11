@@ -83,7 +83,7 @@ export default function MigrantWorkerSignup({ onClose, onSignin, onSuccess }) {
         <div className="h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600" />
 
         <div className="p-4 sm:p-6">
-          {/* Header */}
+         
           <div className="text-center mb-5">
             <div className="mx-auto mb-3 w-12 h-12 flex items-center justify-center rounded-xl bg-emerald-100">
               <User className="w-6 h-6 text-emerald-600" />
@@ -92,7 +92,7 @@ export default function MigrantWorkerSignup({ onClose, onSignin, onSuccess }) {
             <p className="text-xs text-gray-600">Create your NeuraCare account</p>
           </div>
 
-          {/* Steps */}
+       
           <div className="flex items-center gap-2 mb-5">
             <StepDot active label="1" done={otpSent} />
             <div className={`flex-1 h-0.5 rounded ${otpSent ? "bg-emerald-500" : "bg-gray-200"}`} />
@@ -104,7 +104,6 @@ export default function MigrantWorkerSignup({ onClose, onSignin, onSuccess }) {
 
           <form onSubmit={handleVerifyAndSignup} className="space-y-3">
 
-            {/* ── Phase 1: Detail fields (HIDDEN when OTP is sent) ── */}
             {!otpSent && (
               <>
                 <Input label="Full Name" placeholder="Enter your full name" icon={<User className="w-4 h-4" />}
@@ -142,7 +141,6 @@ export default function MigrantWorkerSignup({ onClose, onSignin, onSuccess }) {
               </>
             )}
 
-            {/* ── Phase 2: OTP verification (shown when OTP is sent) ── */}
             {otpSent && (
               <>
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 text-xs text-emerald-700">
